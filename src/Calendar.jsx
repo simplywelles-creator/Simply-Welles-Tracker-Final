@@ -12,10 +12,10 @@ const TYPE_BG = {
   posting: 'rgba(135, 162, 122, 0.12)',
 };
 
-const TYPE_LABEL = {
-  due: 'Due',
-  filming: 'Film',
-  posting: 'Post',
+const TYPE_VERB = {
+  due: 'due',
+  filming: 'film',
+  posting: 'post',
 };
 
 function pad(n) {
@@ -172,11 +172,11 @@ export default function Calendar({ campaigns }) {
                   {events.slice(0, 2).map((e, idx) => (
                     <span
                       key={idx}
-                      title={`${e.campaign.brand} — ${TYPE_LABEL[e.type]}`}
+                      title={`${e.campaign.brand} — ${TYPE_VERB[e.type]}`}
                       style={{
-                        fontSize: '8.5px',
-                        fontWeight: 600,
-                        lineHeight: 1.1,
+                        fontSize: '8px',
+                        fontWeight: 700,
+                        lineHeight: 1.15,
                         color: TYPE_COLORS[e.type],
                         whiteSpace: 'nowrap',
                         overflow: 'hidden',
@@ -185,7 +185,7 @@ export default function Calendar({ campaigns }) {
                         textAlign: 'center',
                       }}
                     >
-                      {TYPE_LABEL[e.type]}
+                      {e.campaign.brand} {TYPE_VERB[e.type]}
                     </span>
                   ))}
                   {events.length > 2 && (
@@ -202,15 +202,15 @@ export default function Calendar({ campaigns }) {
 
       <div style={{ display: 'flex', gap: '16px', fontSize: '12px', color: 'var(--ink-soft)', marginBottom: '20px' }}>
         <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-          <span style={{ fontWeight: 600, fontSize: '11px', color: TYPE_COLORS.due }}>Due</span>
+          <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: TYPE_COLORS.due, display: 'inline-block' }} />
           Due date
         </span>
         <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-          <span style={{ fontWeight: 600, fontSize: '11px', color: TYPE_COLORS.filming }}>Film</span>
+          <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: TYPE_COLORS.filming, display: 'inline-block' }} />
           Filming
         </span>
         <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-          <span style={{ fontWeight: 600, fontSize: '11px', color: TYPE_COLORS.posting }}>Post</span>
+          <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: TYPE_COLORS.posting, display: 'inline-block' }} />
           Posting
         </span>
       </div>
@@ -233,17 +233,16 @@ export default function Calendar({ campaigns }) {
                 <div key={`${date}-${idx}`} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px' }}>
                   <span
                     style={{
-                      fontSize: '10px',
-                      fontWeight: 700,
-                      color: TYPE_COLORS[e.type],
+                      width: '8px',
+                      height: '8px',
+                      borderRadius: '50%',
+                      background: TYPE_COLORS[e.type],
                       flexShrink: 0,
-                      minWidth: '28px',
                     }}
-                  >
-                    {TYPE_LABEL[e.type]}
-                  </span>
+                  />
                   <span>
-                    {e.campaign.brand}{' '}
+                    <strong style={{ color: TYPE_COLORS[e.type] }}>{e.campaign.brand}</strong>{' '}
+                    {TYPE_VERB[e.type]}{' '}
                     {new Date(date + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                   </span>
                 </div>
